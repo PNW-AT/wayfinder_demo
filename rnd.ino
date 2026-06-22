@@ -17,11 +17,11 @@
 
 // const uint8_t numInputs = sizeof(inputs)/sizeof(inputs[0]);
 
-  // for(int i = 0; i < numInputs; i++){
-  //   int channel = inputs[i].receiverChannel;
-  //   int pin = inputs[i].inputPin;
-  //   Serial.print(channel);
-  //   Serial.print(", ");
-  //   Serial.println(pin);
-  //   attachPulseInput(pin, signal, lastSignalTime, channel);
-  // }
+// for(int i = 0; i < numInputs; i++){
+//   int channel = inputs[i].receiverChannel;
+//   int pin = inputs[i].inputPin;
+//   Serial.print(channel);
+//   Serial.print(", ");
+//   Serial.println(pin);
+//   attachPulseInput(pin, signal, lastSignalTime, channel);
+// }

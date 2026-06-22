@@ -12,7 +12,15 @@ float speedDecel = 2;
 float turnAccel = 0.75;
 float turnDecel = 1.5;
 
-float deadzone=0.1;
+const int LEFT_MOTOR_CENTER = 1500;
+const int LEFT_MOTOR_SLOW = 30;
+const int LEFT_MOTOR_FAST = 500;
+
+const int RIGHT_MOTOR_CENTER = 1500;
+const int RIGHT_MOTOR_SLOW = 30;
+const int RIGHT_MOTOR_FAST = 500;
+
+float deadzone = 0.1; // for rc joystick
 
 void setup() {
   Serial.begin(115200);
@@ -24,8 +32,8 @@ void setup() {
 void loop() {
   throttle = -getInput(ch2);
   yaw = -getInput(ch1);
-  
-  if(active()) {
+
+  if (active()) {
     drive(throttle, yaw, speedAccel, speedDecel, turnAccel, turnDecel, deadzone);
     joystick(throttle, yaw);
   } else {
@@ -35,7 +43,7 @@ void loop() {
 }
 
 bool active() {
-  if(connected(ch1) && connected(ch2) && connected(ch3)/*&& connected(ch4) && connected(ch5) && connected(ch6)*/ && signal[ch3] > 1100){
+  if (connected(ch1) && connected(ch2) && connected(ch3)/*&& connected(ch4) && connected(ch5) && connected(ch6)*/ && signal[ch3] > 1100) {
     return true;
   } else {
     return false;
