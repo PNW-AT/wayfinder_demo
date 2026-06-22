@@ -34,7 +34,7 @@ void loop() {
   yaw = -getInput(ch1);
 
   if (active()) {
-    drive(throttle, yaw, speedAccel, speedDecel, turnAccel, turnDecel, deadzone);
+    drive(throttle, yaw, speedAccel, speedDecel, turnAccel, turnDecel, deadzone, LEFT_MOTOR_CENTER, LEFT_MOTOR_SLOW, LEFT_MOTOR_FAST, RIGHT_MOTOR_CENTER, RIGHT_MOTOR_SLOW, RIGHT_MOTOR_FAST);
     joystick(throttle, yaw);
   } else {
     park();

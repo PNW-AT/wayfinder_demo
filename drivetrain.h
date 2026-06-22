@@ -45,7 +45,7 @@ void drive(float throttle, float yaw, float speedAccel, float speedDecel, float 
   int rightSpeed = 0;
 
   // convert xy to lr, remap range, compensate for ESC deadzones
-  DriveController_TwoSideDrive(rotation, speed, leftSpeed, writeSpeed,
+  DriveController_TwoSideDrive(rotation, speed, leftSpeed, rightSpeed,
                                LEFT_MOTOR_CENTER, LEFT_MOTOR_SLOW, LEFT_MOTOR_FAST,
                                RIGHT_MOTOR_CENTER, RIGHT_MOTOR_SLOW, RIGHT_MOTOR_FAST);
 
