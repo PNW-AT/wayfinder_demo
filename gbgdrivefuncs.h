@@ -35,7 +35,7 @@ void DriveController_TwoSideDrive(float turnToDrive, float speedToDrive, int& le
   rightMotorWrite = constrain(rightMotorWrite, RIGHT_MOTOR_CENTER - abs(RIGHT_MOTOR_FAST), RIGHT_MOTOR_CENTER + abs(RIGHT_MOTOR_FAST));
 }
 
-float InputReader_JoystickAxis(int reading, int neg, int cent, int pos, int deadzone) {
+float InputReader_JoystickAxis(float reading, float neg, float cent, float pos, float deadzone) {
   deadzone = max(deadzone, 0);
   ////////// scale joystick values from adjustible range to -1 to 1
   float output = 0;
