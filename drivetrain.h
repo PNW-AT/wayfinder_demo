@@ -8,8 +8,6 @@ const uint8_t rightESCPin = 5;
 
 float speed; //-1 to 1, positive is forwards
 float rotation; //-1 to 1, positive is clockwise
-// int leftSpeed;
-// int rightSpeed;
 
 // from https://github.com/gobabygocarswithjoysticks/car-code/blob/e2ecab3b4b52e4c09a45647078ed4a7925474c09/gbg_program/_Other_Functions.ino#L6
 float calculateTimeInterval() {
@@ -77,24 +75,28 @@ void driveSetup() {
   rightESC.write(90);
   speed = 0;
   rotation = 0;
-  // leftSpeed = 0;
-  // rightSpeed = 0;
-  // delay(5000);
+  delay(5000);
 }
 
-void drive(float throttle, float yaw, float speedAccel, float speedDecel, float turnAccel, float turnDecel) {
+void drive(float throttle, float yaw, float speedAccel, float speedDecel, float turnAccel, float turnDecel, float deadzone) {
   if(!leftESC.attached() || !rightESC.attached()) {
     leftESC.attach(leftESCPin);
     rightESC.attach(rightESCPin);
   }
 
-  // speed += constrain(throttle - speed, -wheelAccel, wheelAccel);
-  // rotation += constrain(yaw - rotation, -wheelAccel, wheelAccel);
-  
+
   float timeInterval = calculateTimeInterval();
 
   throttle=constrain(throttle,-1,1);
   yaw=constrain(yaw,-1,1);
+
+  deadzone=constrain(deadzone,0,1);
+  if(abs(throttle)<deadzone){
+    throttle=0;
+  }
+  if(abs(yaw)<deadzone){
+    yaw=0;
+  }
 
   speed=InputProcessor_LimitAccelerationTwoSettings(speed, throttle, 1.0, speedAccel, speedDecel, timeInterval);
   rotation=InputProcessor_LimitAccelerationTwoSettings(rotation, yaw, 1.0, turnAccel, turnDecel, timeInterval);
@@ -102,27 +104,20 @@ void drive(float throttle, float yaw, float speedAccel, float speedDecel, float 
   speed=constrain(speed,-1,1);
   rotation=constrain(rotation,-1,1);
 
-  int leftSpeed = (speed + rotation) * 90 + 90;
-  int rightSpeed = (speed - rotation) * 90 + 90;
-  // leftSpeed += constrain((throttle - leftSpeed) + yaw, -1000, 1000);
-  // rightSpeed += constrain((throttle - rightSpeed) + yaw, -wheelAccel, wheelAccel);
+  int leftSpeed = (speed + rotation) * 500 + 1500;
+  int rightSpeed = (speed - rotation) * 500 + 1500;
 
-  leftESC.write(leftSpeed);
-  rightESC.write(rightSpeed);
+  leftESC.writeMicroseconds(leftSpeed);
+  rightESC.writeMicroseconds(rightSpeed);
   Serial.print(leftSpeed);
   Serial.print(", ");
   Serial.println(rightSpeed);
 }
 
-void park() {//test to see if i github right
+void park() {
+  calculateTimeInterval();
   speed = 0;
   rotation = 0;
-  // leftSpeed = 0;
-  // rightSpeed = 0;
   leftESC.write(90);
   rightESC.write(90);
-  if(leftESC.attached() || rightESC.attached()) {
-    leftESC.detach();
-    rightESC.detach();
-  }
 }

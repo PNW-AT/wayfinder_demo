@@ -9,6 +9,6 @@ void joystickSetup() {
 }
 
 void joystick(float throttle, float yaw) {
-  jsPitch.write((throttle + 1) * 90);
-  jsRoll.write((yaw + 1) * 90);
+  jsPitch.write(throttle * 90 + 90);
+  jsRoll.write(yaw * 90 + 90);
 }

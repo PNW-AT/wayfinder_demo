@@ -1,13 +1,18 @@
+// by Palmer and Joshua for PNW-AT June 2026
+// for demonstration models of Wayfinders(tm)
+// this program reads a RC receiver, controls a left and right ESC with acceleration, and displays the RC input with two servos
 #include "inputs.h"
 #include "joystick.h"
 #include "drivetrain.h"
 
 float throttle = 0;
 float yaw = 0;
-float speedAccel = .5;
+float speedAccel = 0.5;
 float speedDecel = 2;
-float turnAccel = .5;
-float turnDecel = 2;
+float turnAccel = 0.75;
+float turnDecel = 1.5;
+
+float deadzone=0.1;
 
 void setup() {
   Serial.begin(115200);
@@ -21,7 +26,7 @@ void loop() {
   yaw = -getInput(ch1);
   
   if(active()) {
-    drive(throttle, yaw, speedAccel, speedDecel, turnAccel, turnDecel);
+    drive(throttle, yaw, speedAccel, speedDecel, turnAccel, turnDecel, deadzone);
     joystick(throttle, yaw);
   } else {
     park();

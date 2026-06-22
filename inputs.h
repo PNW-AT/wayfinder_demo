@@ -13,21 +13,28 @@ const uint8_t numInputs = 3;
 const uint8_t ch1 = 0;
 const uint8_t ch2 = 1;
 const uint8_t ch3 = 2;
-// const uint8_t ch4 = 3;
-// const uint8_t ch5 = 4;
-// const uint8_t ch6 = 5;
+//const uint8_t ch4 = 3;
+//const uint8_t ch5 = 4;
+//const uint8_t ch6 = 5;
+
+const uint8_t ch1Pin=A8;
+const uint8_t ch2Pin=A9;
+const uint8_t ch3Pin=A10;
+//const uint8_t ch4Pin=A11;
+//const uint8_t ch5Pin=A12;
+//const uint8_t ch6Pin=A13;
 
 volatile unsigned int signal[numInputs];
 volatile unsigned long lastSignalTime[numInputs];
 const unsigned long maxSignalDelay = 50;
 
 void attachInputs() {
-  attachPulseInput(A8, signal, lastSignalTime, ch1);
-  attachPulseInput(A9, signal, lastSignalTime, ch2);
-  attachPulseInput(A10, signal, lastSignalTime, ch3);
-  // attachPulseInput(A11, signal, lastSignalTime, ch4);
-  // attachPulseInput(A12, signal, lastSignalTime, ch5);
-  // attachPulseInput(A13, signal, lastSignalTime, ch6);
+  attachPulseInput(ch1Pin, signal, lastSignalTime, ch1);
+  attachPulseInput(ch2Pin, signal, lastSignalTime, ch2);
+  attachPulseInput(ch3Pin, signal, lastSignalTime, ch3);
+  // attachPulseInput(ch4Pin, signal, lastSignalTime, ch4);
+  // attachPulseInput(ch5Pin, signal, lastSignalTime, ch5);
+  // attachPulseInput(ch6Pin, signal, lastSignalTime, ch6);
 }
 
 bool connected(uint8_t channel, unsigned long maxSignalDelay = 50) {
