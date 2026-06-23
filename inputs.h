@@ -1,12 +1,12 @@
 #include "PulseInput.h"
 
 /*
-channel 1: R stick LR
-channel 2: R stick UD
-channel 3: L stick UD (throttle), switches set to 1000
-channel 4: L stick LR
-channel 5: R knob
-channel 6: L knob
+  channel 1: R stick LR
+  channel 2: R stick UD
+  channel 3: L stick UD (throttle), switches set to 1000
+  channel 4: L stick LR
+  channel 5: R knob
+  channel 6: L knob
 */
 
 const uint8_t numInputs = 3;
@@ -17,9 +17,9 @@ const uint8_t ch3 = 2;
 //const uint8_t ch5 = 4;
 //const uint8_t ch6 = 5;
 
-const uint8_t ch1Pin=A8;
-const uint8_t ch2Pin=A9;
-const uint8_t ch3Pin=A10;
+const uint8_t ch1Pin = A8;
+const uint8_t ch2Pin = A9;
+const uint8_t ch3Pin = A10;
 //const uint8_t ch4Pin=A11;
 //const uint8_t ch5Pin=A12;
 //const uint8_t ch6Pin=A13;
@@ -38,7 +38,7 @@ void attachInputs() {
 }
 
 bool connected(uint8_t channel, unsigned long maxSignalDelay = 50) {
-  if(millis() - lastSignalTime[channel] < maxSignalDelay) {
+  if (millis() - lastSignalTime[channel] < maxSignalDelay) {
     return true;
   } else {
     return false;
@@ -50,24 +50,24 @@ float getInput(uint8_t channel) {
 }
 
 // void printInputs(){
-  // Serial.print(signal[0]);  //for debugging
-  // Serial.print(", ");
-  // Serial.print(signal[1]);
-  // Serial.print(", ");
-  // Serial.print(signal[2]);
-  // Serial.print(", ");
-  // Serial.print(signal[3]);
-  // Serial.print(", ");
-  // Serial.print(signal[4]);
-  // Serial.print(", ");
-  // Serial.print(signal[5]);
-  // Serial.print(", ");
+// Serial.print(signal[0]);  //for debugging
+// Serial.print(", ");
+// Serial.print(signal[1]);
+// Serial.print(", ");
+// Serial.print(signal[2]);
+// Serial.print(", ");
+// Serial.print(signal[3]);
+// Serial.print(", ");
+// Serial.print(signal[4]);
+// Serial.print(", ");
+// Serial.print(signal[5]);
+// Serial.print(", ");
 
-  // Serial.println(getInput(ch1));
+// Serial.println(getInput(ch1));
 
-  // if(connected(ch1) && connected(ch2) && connected(ch3) && connected(ch4) && connected(ch5) && connected(ch6) && signal[ch3] > 1100){
-  //   Serial.println("Connected!");
-  // } else{
-  //   Serial.println("Disconnected!");
-  // }
+// if(connected(ch1) && connected(ch2) && connected(ch3) && connected(ch4) && connected(ch5) && connected(ch6) && signal[ch3] > 1100){
+//   Serial.println("Connected!");
+// } else{
+//   Serial.println("Disconnected!");
+// }
 // }

@@ -4,21 +4,21 @@
 #ifndef PulseInput_h
 #define PulseInput_h
 
-// Read signal at given pin 
+// Read signal at given pin
 template<uint8_t PIN, volatile uint16_t* time_change, volatile uint32_t* time_stamp, uint8_t channel>
 void attachPulseInput() {
-  
+
   // lamda function to update time
   auto interruptFunc = [] (void) {
     static uint32_t time_last = micros();
-    if( digitalRead(PIN) ) {      // rising
+    if ( digitalRead(PIN) ) {     // rising
       time_last = micros();
     } else {                      // falling
       time_change[channel] = uint16_t(micros() - time_last);
       time_stamp[channel] = millis();
     }
   };
-  
+
   // set pin interrupt
   time_change[channel] = 0;
   pinMode(PIN, INPUT_PULLUP);
