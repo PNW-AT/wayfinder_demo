@@ -12,21 +12,22 @@ float speedDecel = 2;
 float turnAccel = 0.75;
 float turnDecel = 1.5;
 
-const int LEFT_MOTOR_CENTER = 1500;
-const int LEFT_MOTOR_SLOW = 30;
+const int LEFT_MOTOR_CENTER = 1490;
+const int LEFT_MOTOR_SLOW = 55;
 const int LEFT_MOTOR_FAST = 500;
 
-const int RIGHT_MOTOR_CENTER = 1500;
-const int RIGHT_MOTOR_SLOW = 30;
+const int RIGHT_MOTOR_CENTER = 1490;
+const int RIGHT_MOTOR_SLOW = 55;
 const int RIGHT_MOTOR_FAST = 500;
 
 float deadzone = 0.1; // for rc joystick
 
 void setup() {
   Serial.begin(115200);
-  driveSetup();
+  driveSetup(); // need to wait at least 3 seconds between this and loop starting
   attachInputs();
   joystickSetup();
+  joystickFlightControlsCheck(); // joystick animation, takes at least 3 seconds
 }
 
 void loop() {

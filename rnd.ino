@@ -1,3 +1,7 @@
+/**
+ * scratchpad from our experimenting with an even easier to use array based pulseinput version
+ */
+ 
 // typedef struct pin_channel_t{
 //   int receiverChannel;
 //   int inputPin;

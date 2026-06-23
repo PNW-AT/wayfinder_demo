@@ -18,7 +18,6 @@ void driveSetup() {
   rightESC.write(90);
   speed = 0;
   rotation = 0;
-  delay(5000);
 }
 
 /**
@@ -41,6 +40,11 @@ void drive(float throttle, float yaw, float speedAccel, float speedDecel, float 
   speed = InputProcessor_LimitAccelerationTwoSettings(speed, throttle, 1.0, speedAccel, speedDecel, timeInterval);
   rotation = InputProcessor_LimitAccelerationTwoSettings(rotation, yaw, 1.0, turnAccel, turnDecel, timeInterval);
 
+  Serial.print(speed);
+  Serial.print(",");
+  Serial.print(rotation);
+  Serial.print(",");
+
   int leftSpeed = 0;
   int rightSpeed = 0;
 
@@ -49,6 +53,10 @@ void drive(float throttle, float yaw, float speedAccel, float speedDecel, float 
                                LEFT_MOTOR_CENTER, LEFT_MOTOR_SLOW, LEFT_MOTOR_FAST,
                                RIGHT_MOTOR_CENTER, RIGHT_MOTOR_SLOW, RIGHT_MOTOR_FAST);
 
+  Serial.print(leftSpeed);
+  Serial.print(",");
+  Serial.print(rightSpeed);
+  Serial.print("\n");
   leftESC.writeMicroseconds(leftSpeed);
   rightESC.writeMicroseconds(rightSpeed);
 }
